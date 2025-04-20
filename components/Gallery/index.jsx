@@ -12,25 +12,30 @@ const Gallery = () => {
     return (
       <>
         {imageList?.map((image) => (
-          <tr key={`emoji-${image}`}>
-            <td>{image}</td>
-            <td>
-              <a download href={Emojis[image]}>
-                <Image alt={image} height={25} src={Emojis[image]} width={25} />
-              </a>
-            </td>
-          </tr>
+          <li key={`emoji-${image}`}>
+            <a
+              className={classes["Gallery-link"]}
+              download={`${image}.png`}
+              href={Emojis[image].src}
+            >
+              {image}
+              <Image
+                alt={image}
+                height={20}
+                src={Emojis[image].src}
+                width={20}
+              />
+            </a>
+          </li>
         ))}
       </>
     );
   };
   return (
     <article className={classes.Gallery}>
-      <table>
-        <tbody>
-          <Images />
-        </tbody>
-      </table>
+      <ol className={classes["Gallery-list"]}>
+        <Images />
+      </ol>
     </article>
   );
 };

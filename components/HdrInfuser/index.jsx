@@ -140,7 +140,7 @@ const HdrInfuser = () => {
           onChange={handleFileChange}
           type="file"
         />
-        Choose image to HDR-infuse
+        Choose image to glo-up
         {isLoading ? (
           <Loader className={classes["HdrInfuser-upload-icon"]} />
         ) : (

@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import "../styles/index.scss";
 
 export const metadata = {
-  title: "HDR Infuser",
+  title: "glomojis",
 };
 
 export default function RootLayout({ children }) {

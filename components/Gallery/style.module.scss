@@ -1,2 +1,29 @@
 .Gallery {
+  &-list {
+    border: 1px solid var(--theme-border);
+    border-collapse: collapse;
+    border-radius: var(--radius-sm);
+    list-style: none;
+    margin: 0;
+    max-width: 300px;
+    overflow: hidden;
+    padding: 0.25em 0;
+    width: 100%;
+  }
+
+  &-link {
+    align-items: center;
+    display: flex;
+    font-family: var(--sans);
+    font-size: 0.875em;
+    justify-content: space-between;
+    padding: 0.35em 0.75em;
+    text-decoration: none;
+
+    &:hover,
+    &:active,
+    &:focus {
+      background-color: var(--theme-border);
+    }
+  }
 }
