@@ -18,7 +18,7 @@ const Gallery = () => {
               download={`${image}.png`}
               href={Emojis[image].src}
             >
-              {image}
+              <span>{image}</span>
               <Image
                 alt={image}
                 height={20}
