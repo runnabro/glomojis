@@ -57,6 +57,28 @@
 
   &-output {
     height: 200px;
+
+    &-preview {
+      align-items: center;
+      display: flex;
+      flex-direction: column;
+      gap: 2em;
+    }
+
+    &-download {
+      color: var(--theme-text-minimum);
+      font-family: var(--sans);
+      font-size: 0.875em;
+      font-weight: 500;
+      padding: 0.25em 0.5em;
+      text-decoration: none;
+
+      &:hover,
+      &:active,
+      &:focus {
+        color: var(--theme-text);
+      }
+    }
   }
 
   &-img {

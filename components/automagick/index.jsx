@@ -157,8 +157,17 @@ const AutoMagick = () => {
         )}
       </label>
       <div className={classes["AutoMagick-output"]}>
-        {!isLoading && (
-          <img className={classes["AutoMagick-img"]} src={outputFile} />
+        {!isLoading && outputFile && (
+          <div className={classes["AutoMagick-output-preview"]}>
+            <img className={classes["AutoMagick-img"]} src={outputFile} />
+            <a
+              className={classes["AutoMagick-output-download"]}
+              download="hdr-infused.png"
+              href={outputFile}
+            >
+              Download
+            </a>
+          </div>
         )}
       </div>
     </div>
