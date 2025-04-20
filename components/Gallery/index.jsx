@@ -3,12 +3,12 @@
 import React from "react";
 import Image from "next/image";
 
-// import * as Emojis from "./src";
+import * as Emojis from "./src";
 import classes from "./style.module.scss";
 
 const Gallery = () => {
   const Images = () => {
-    // const imageList = Object.keys(Emojis);
+    const imageList = Object.keys(Emojis);
     return (
       <>
         {imageList?.map((image) => (
