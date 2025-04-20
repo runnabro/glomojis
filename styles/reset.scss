@@ -1,0 +1,54 @@
+// box model reset
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+// reset html/body
+html {
+  @media (prefers-color-scheme: dark) {
+    color-scheme: dark;
+  }
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+body {
+  font-feature-settings: "kern";
+  font-weight: 400;
+  text-rendering: optimizeLegibility;
+}
+
+// reset lists
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+}
+
+// reset margins
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+}
+
+// reset links
+a {
+  color: inherit;
+
+  &:hover,
+  &:active,
+  &:focus {
+    text-decoration: none;
+  }
+}
