@@ -1,9 +1,9 @@
-import AutoMagick from "../components/automagick";
+import HdrInfuser from "../components/HdrInfuser";
 
 export default function Home() {
   return (
     <main>
-      <AutoMagick />
+      <HdrInfuser />
     </main>
   );
 }

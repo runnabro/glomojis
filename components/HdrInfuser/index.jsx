@@ -11,7 +11,7 @@ import { FileImage, Loader } from "lucide-react";
 
 import classes from "./style.module.scss";
 
-const AutoMagick = () => {
+const HdrInfuser = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [inputFile, setInputFile] = useState(null);
   const [outputFile, setOutputFile] = useState(null);
@@ -126,15 +126,15 @@ const AutoMagick = () => {
   };
 
   return (
-    <div className={classes["AutoMagick"]}>
+    <div className={classes["HdrInfuser"]}>
       <label
-        className={`${classes["AutoMagick-upload"]} ${
-          isLoading ? classes["AutoMagick-upload_disabled"] : ""
+        className={`${classes["HdrInfuser-upload"]} ${
+          isLoading ? classes["HdrInfuser-upload_disabled"] : ""
         }`}
       >
         <input
           accept="image/png, image/jpeg, image/webp, image/gif, image/heic"
-          className={classes["AutoMagick-upload-input"]}
+          className={classes["HdrInfuser-upload-input"]}
           disabled={isLoading}
           id="hdr-input"
           onChange={handleFileChange}
@@ -142,26 +142,26 @@ const AutoMagick = () => {
         />
         Choose image to HDR-infuse
         {isLoading ? (
-          <Loader className={classes["AutoMagick-upload-icon"]} />
+          <Loader className={classes["HdrInfuser-upload-icon"]} />
         ) : (
           <>
             {inputFile ? (
               <img
-                className={classes["AutoMagick-upload-preview"]}
+                className={classes["HdrInfuser-upload-preview"]}
                 src={inputFile}
               />
             ) : (
-              <FileImage className={classes["AutoMagick-upload-icon"]} />
+              <FileImage className={classes["HdrInfuser-upload-icon"]} />
             )}
           </>
         )}
       </label>
-      <div className={classes["AutoMagick-output"]}>
+      <div className={classes["HdrInfuser-output"]}>
         {!isLoading && outputFile && (
-          <div className={classes["AutoMagick-output-preview"]}>
-            <img className={classes["AutoMagick-img"]} src={outputFile} />
+          <div className={classes["HdrInfuser-output-preview"]}>
+            <img className={classes["HdrInfuser-img"]} src={outputFile} />
             <a
-              className={classes["AutoMagick-output-download"]}
+              className={classes["HdrInfuser-output-download"]}
               download="hdr-infused.png"
               href={outputFile}
             >
@@ -174,4 +174,4 @@ const AutoMagick = () => {
   );
 };
 
-export default AutoMagick;
+export default HdrInfuser;
