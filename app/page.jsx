@@ -1,4 +1,4 @@
-import AutoMagick from "../components/automagick";
+import AutoMagick from "../components/AutoMagick";
 
 export default function Home() {
   return (

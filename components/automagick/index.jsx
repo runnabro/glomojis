@@ -1,18 +1,19 @@
 "use client";
 
-import { useRef, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import {
   initializeImageMagick,
   ImageMagick,
   Magick,
   MagickFormat,
-  Quantum,
 } from "@imagemagick/magick-wasm";
 
+import classes from "./style.module.scss";
+
 const AutoMagick = () => {
-  // const commandEl = useRef();
-  const outputEl = useRef();
+  const [inputFile, setInputFile] = useState(null);
+  const [outputFile, setOutputFile] = useState(null);
   const [isInitialized, setIsInitialized] = useState(false);
 
   useEffect(() => {
@@ -32,47 +33,27 @@ const AutoMagick = () => {
     init();
   }, []);
 
-  const hdrCommand = JSON.stringify([
-    "convert",
-    "People.jpg",
-    "(",
-    "-clone",
-    "0",
-    "People2.jpg",
-    "-colorspace",
-    "rgb",
-    "-auto-gamma",
-    "-evaluate",
-    "Multiply",
-    "1.5",
-    "-evaluate",
-    "Pow",
-    "0.9",
-    "-colorspace",
-    "sRGB",
-    "-depth",
-    "16",
-    ")",
-    "-compose",
-    "over",
-    "-composite",
-    "people_compare2.png",
-  ]);
-
   // fetch the input image and get its content bytes
   async function getImage(src) {
-    const fetchedSourceImage1 = await fetch(src);
-    return new Uint8Array(await fetchedSourceImage1.arrayBuffer());
+    const fetchSourceImage = await fetch(src);
+    return new Uint8Array(await fetchSourceImage.arrayBuffer());
   }
 
-  const doMagick = async () => {
+  const handleFileChange = async (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const url = URL.createObjectURL(file);
+      setInputFile(url);
+      const imageData = await getImage(url);
+      await processImage(imageData);
+    }
+  };
+
+  const processImage = async (file) => {
     if (!isInitialized) {
       console.log("ImageMagick not initialized yet");
       return;
     }
-    console.log("Magick started");
-    const inputFile = await getImage("/take_my_money.png");
-    console.log("File loaded");
 
     return new Promise((resolve, reject) => {
       (async () => {
@@ -85,9 +66,9 @@ const AutoMagick = () => {
           const profileData = await profileResponse.arrayBuffer();
           const profileBytes = new Uint8Array(profileData);
 
-          ImageMagick.read(inputFile, (image) => {
+          ImageMagick.read(file, (image) => {
             try {
-              // Apply the command sequence
+              // Apply hdr
               image.colorspace = "RGB";
               image.autoGamma();
               image.evaluate("Multiply", "1.5");
@@ -95,13 +76,13 @@ const AutoMagick = () => {
               image.colorspace = "sRGB";
               image.depth = 16;
 
-              // Apply the profile
+              // Apply profile
               image.setProfile("icc", profileBytes);
 
               // Write the result
               image.write(MagickFormat.Png, (data) => {
                 const blob = new Blob([data], { type: "image/png" });
-                outputEl.current.src = URL.createObjectURL(blob);
+                setOutputFile(URL.createObjectURL(blob));
                 resolve(blob);
               });
             } catch (error) {
@@ -115,14 +96,21 @@ const AutoMagick = () => {
     });
   };
 
+  const doMagick = async () => {
+    if (!inputFile) return;
+    const imageData = await getImage(inputFile);
+    await processImage(imageData);
+  };
+
   return (
     <>
-      <input type="file" />
-      <button onClick={doMagick} type="button">
-        BLIND ME
-      </button>
-      <img src="/take_my_money.png" />
-      <img ref={outputEl} />
+      <input
+        accept="image/png, image/jpeg, image/webp, image/gif"
+        onChange={handleFileChange}
+        type="file"
+      />
+      <img className={classes["AutoMagick-img"]} src={inputFile} />
+      <img className={classes["AutoMagick-img"]} src={outputFile} />
     </>
   );
 };
