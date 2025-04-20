@@ -162,7 +162,7 @@ const HdrInfuser = () => {
             <img className={classes["HdrInfuser-img"]} src={outputFile} />
             <a
               className={classes["HdrInfuser-output-download"]}
-              download="hdr-infused.png"
+              download="post-glo-up.png"
               href={outputFile}
             >
               Download
