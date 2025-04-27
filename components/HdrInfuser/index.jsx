@@ -140,9 +140,11 @@ const HdrInfuser = () => {
           onChange={handleFileChange}
           type="file"
         />
-        Choose image to glo-up
+        {isLoading ? "Large files take a bit…" : "Choose image to glo-up"}
         {isLoading ? (
-          <Loader className={classes["HdrInfuser-upload-icon"]} />
+          <Loader
+            className={`${classes["HdrInfuser-upload-icon"]} ${classes["HdrInfuser-upload-icon_spin"]}`}
+          />
         ) : (
           <>
             {inputFile ? (
