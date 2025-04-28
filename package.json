@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@imagemagick/magick-wasm": "^0.0.34",
+    "@imagemagick/magick-wasm": "^0.0.35",
     "@vercel/analytics": "^1.5.0",
     "lucide-react": "^0.501.0",
     "next": "15.3.1",
